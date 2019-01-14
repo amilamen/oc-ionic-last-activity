@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons>
+            <button ion-button icon-only (click)="onToggleMenu()">
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>
+            Liste des Livres
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <button ion-item
+        icon-start
+        *ngFor="let book of books; let i = index"
+        [color]="book.isLent ? 'unavailable' : 'available-list'"
+        (click)="onShowBook(i)">
+        <ion-icon name="book"></ion-icon>
+        <b>{{ book.title }}</b> <br />Auteur: {{ book.author }}
+        <p *ngIf="book.borrower">Prêté à {{ book.borrower.name }}</p>
+    </button>
+</ion-content>

@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons>
+            <button ion-button icon-only (click)="onToggleMenu()">
+                <ion-icon name="menu"></ion-icon>   
+            </button>
+        </ion-buttons>
+        <ion-title>
+            Liste des CDs
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <button ion-item
+        icon-start
+        *ngFor="let cd of cds; let i = index"
+        [color]="cd.isLent ? 'unavailable' : 'available-list'"
+        (click)="onShowCd(i)">
+        <ion-icon name="disc"></ion-icon>
+        <b>{{ cd.title }}</b> <br />Artiste: {{ cd.artist }}
+        <p *ngIf="cd.borrower">Prêté à {{ cd.borrower.name }}</p>
+    </button>
+</ion-content>

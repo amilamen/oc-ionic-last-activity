@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar>
+        <ion-buttons>
+            <button ion-button clear (click)="onDismissModal()">Fermer</button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card [ngClass]="{'is-on': !cd.isLent, 'is-off': cd.isLent }">
+        <ion-card-header>
+            {{ cd.title }}
+        </ion-card-header>
+        <ion-card-content>
+            <h3>{{ cd.artist }}</h3>
+            <p *ngFor="let line of cd.description">{{ line }}</p>
+            <br />
+            <h4 *ngIf="cd.isLent">
+                Cd prêté
+                <span *ngIf="cd.borrower">&nbsp;à {{ cd.borrower.name }}</span>
+            </h4>
+            <h4 *ngIf="!cd.isLent">Cd non prêté</h4>
+        </ion-card-content>
+    </ion-card>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <button ion-button full [disabled]="cd.isLent" color="unavailable" (click)="onToggleLend()">
+                    Prêter
+                </button>
+            </ion-col>
+            <ion-col>
+                <button ion-button full color="available" [disabled]="!cd.isLent" (click)="onToggleLend()">
+                    Rendre
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <form [formGroup]="borrowForm" *ngIf="isLending">
+        <ion-list>
+            <ion-item>
+                <ion-label floating>Nom de l'emprunteur</ion-label>
+                <ion-input formControlName="name"></ion-input>
+            </ion-item>
+        </ion-list>
+        <button ion-button full [disabled]="borrowForm.invalid" (click)="onSubmitForm()">Enregistrer</button>
+    </form>
+</ion-content>

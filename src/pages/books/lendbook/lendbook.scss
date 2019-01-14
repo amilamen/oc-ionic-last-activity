@@ -1,0 +1,26 @@
+page-lendbook {
+    ion-card-content h4 {
+        text-align: right;
+        font-weight: bold;
+    }
+    .is-on {
+        ion-card-content, ion-card-header, ion-grid {
+            background-color: color($colors, available);
+            color: color($colors, unavailable);
+        }
+
+        ion-card-content p {
+            color: white;
+        }
+    }
+    .is-off {
+        ion-card-content, ion-card-header, ion-grid {
+            background-color: color($colors, unavailable);
+            color: color($colors, available);
+        }
+
+        ion-card-content p {
+            color: white;
+        }
+    }
+}
